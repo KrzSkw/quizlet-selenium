@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 import time
+import os
 PATH = "C:\\Program Files (x86)\\chromedriver.exe"
 
 
@@ -34,6 +35,23 @@ except:
     driver.quit() #closes chrome
 
 
+
+
+usernameInput = driver.find_element_by_id("username")
+usernameInput.send_keys(os.environ.get('QUIZLET_USERNAME'))
+time.sleep(1)
+passwordInput = driver.find_element_by_id("password")
+passwordInput.send_keys(os.environ.get('QUIZLET_PASS'))
+
+try:
+    button3 = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'UILoadingButton')))
+    time.sleep(2)
+    button3.click()
+    print("button3 found")
+
+except:
+    print("button3 NOT found")
+    driver.quit() #closes chrome
 
 
 
