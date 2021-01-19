@@ -7,6 +7,7 @@ from selenium.webdriver import ActionChains
 import time
 PATH = "C:\\Program Files (x86)\\chromedriver.exe"
 
+
 driver = webdriver.Chrome(PATH)
 
 driver.get("https://quizlet.com/create-set")
@@ -20,8 +21,21 @@ try:
 
 except:
     print("button NOT found")
-    time.sleep(10)
     driver.quit() #closes chrome
+
+try:
+    button2 = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//button[text()="Zaloguj się"]')))
+    time.sleep(2)
+    button2.click()
+    print("button2 found")
+
+except:
+    print("button2 NOT found")
+    driver.quit() #closes chrome
+
+
+
+
 
 # searchForTitle = driver.find_element_by_class_name("AutoExpandTextarea-textarea")
 # searchForTitle.send_keys("test quizlet title")
@@ -31,5 +45,5 @@ except:
 
 
 
-time.sleep(10)
-driver.quit() #closes chrome
+#time.sleep(10)
+#driver.quit() #closes chrome
